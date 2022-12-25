@@ -24,29 +24,41 @@ function App() {
     }
   }, [state.darkMode]);
 
-  function showAlert (message, type) {
-    
+  function showAlert(message, type) {
+    setState(prev => ({
+      ...prev,
+      alert: { msg: message, type: type }
+    }));
+
+    setTimeout(() => {
+      setState(prev => ({
+        ...prev,
+        alert: null
+      }))
+    }, 1500)
   }
 
   function toggleMode(e) {
     if (state.darkMode) {
       setState(prev => ({
         ...prev,
-        darkMode: false
+        darkMode: false,
       }));
+      showAlert("Light Mode has been Enabled", "success");
     } else {
       setState(prev => ({
         ...prev,
-        darkMode: true
+        darkMode: true,
       }));
+      showAlert("Dark Mode has been Enabled", "success");
     }
   }
   return (
     <>
       <Navbar title={'Text Utils'} aboutText="About Text Utils" darkMode={state.darkMode} toggleMode={toggleMode} />
-      <Alerts alert="This is an Alert" />
+      <Alerts alert={state.alert} />
       <div className='container'>
-        <TextForm heading="Enter the text to analyze below" />
+        <TextForm heading="Enter the text to analyze below" showAlert={showAlert} />
         {/* <About /> */}
       </div>
 
