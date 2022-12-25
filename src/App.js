@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Alerts from './components/Alerts';
-//import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 
@@ -30,12 +31,13 @@ function App() {
       alert: { msg: message, type: type }
     }));
 
-    setTimeout(() => {
+   let timerId = setTimeout(() => {
       setState(prev => ({
         ...prev,
         alert: null
       }))
-    }, 1500)
+    }, 1000);
+
   }
 
   function toggleMode(e) {
@@ -58,8 +60,14 @@ function App() {
       <Navbar title={'Text Utils'} aboutText="About Text Utils" darkMode={state.darkMode} toggleMode={toggleMode} />
       <Alerts alert={state.alert} />
       <div className='container'>
-        <TextForm heading="Enter the text to analyze below" showAlert={showAlert} />
-        {/* <About /> */}
+
+        <Routes>
+
+          <Route path='/' element={<TextForm heading="Enter the text to analyze below" showAlert={showAlert} />} />
+          <Route path='/about' element={<About />} />
+
+        </Routes>
+
       </div>
 
     </>
