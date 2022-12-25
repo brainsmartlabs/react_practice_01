@@ -31,7 +31,7 @@ function App() {
       alert: { msg: message, type: type }
     }));
 
-   let timerId = setTimeout(() => {
+    setTimeout(() => {
       setState(prev => ({
         ...prev,
         alert: null
@@ -46,13 +46,13 @@ function App() {
         ...prev,
         darkMode: false,
       }));
-      showAlert("Light Mode has been Enabled", "success");
+      //showAlert("Light Mode has been Enabled", "success");
     } else {
       setState(prev => ({
         ...prev,
         darkMode: true,
       }));
-      showAlert("Dark Mode has been Enabled", "success");
+      //showAlert("Dark Mode has been Enabled", "success");
     }
   }
   return (
@@ -64,7 +64,7 @@ function App() {
         <Routes>
 
           <Route path='/' element={<TextForm heading="Enter the text to analyze below" showAlert={showAlert} />} />
-          <Route path='/about' element={<About />} />
+          <Route path='/about' element={<About darkMode={state.darkMode} />} />
 
         </Routes>
 
