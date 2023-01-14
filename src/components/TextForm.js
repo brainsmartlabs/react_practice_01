@@ -26,9 +26,9 @@ function TextForm(props) {
     }
 
     function handleCopyClick(event) {
-        let text = document.getElementById('myBox');
-        text.select();
-        navigator.clipboard.writeText(text.value);
+        // let text = document.getElementById('myBox');
+        // text.select();
+        navigator.clipboard.writeText(text);
         props.showAlert("Copied Text to clipboard", "success");
     }
 
@@ -59,7 +59,7 @@ function TextForm(props) {
             </div>
             <div className='container my-3'>
                 <h1>Your Text Summary:</h1>
-                <p>{text.split(" ").length} words & {text.length} charecters</p>
+                <p>{text.split(/\s+/).length} words & {text.length} charecters</p>
                 <p> Will take {0.5 * text.split(" ").length} Seconds to read</p>
                 <h3> Preview: </h3>
                 <p>{text}</p>
